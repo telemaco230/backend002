@@ -3,15 +3,16 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return response()->json(['message' => 'Hello world!']);
+Route::name("api.auth.")->prefix("auth")->group(function () {
+
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+    Route::middleware('jwt')->group(function () {
+        Route::get('/user', [AuthController::class, 'getUser'])->name('get');
+        Route::put('/user', [AuthController::class, 'updateUser'])->name('update');;
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');;
+    });
+
 });
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-
-Route::middleware('jwt')->group(function () {
-    Route::get('/user', [AuthController::class, 'getUser']);
-    Route::put('/user', [AuthController::class, 'updateUser']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-});
