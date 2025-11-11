@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $clearPassword = fake()->password(4, 8);
+        $clearPassword = fake()->password(8, 16);
         
         $user = User::factory()->create([
             'name' => 'sistema',
