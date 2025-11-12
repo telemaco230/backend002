@@ -13,6 +13,13 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 use App\Traits\APIResponder;
 
+/**
+ * @OA\Info(
+ *      version="1.0.0", 
+ *      title="PRJ- eCommerce Documentation API",
+ *      description="Documentación de la API para PRJ- eCommerce.",
+ * )
+ */
 class AuthController extends Controller
 {
     public function register(Request $request)
@@ -59,6 +66,40 @@ class AuthController extends Controller
         ], 201);
     }
 
+    /**
+     * Realiza el inicio de sesión del usuario.
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     *
+     * @OA\Post(
+     *     path="/api/auth/login",
+     *     tags={"auth"},
+     *     summary="Realiza el inicio de sesión del usuario",
+     * @OA\Parameter(
+     *         description="Dirección de correo electrónico del usuario",
+     *         in="query",
+     *         name="email",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="string", value="test@backend.com", summary="Introduce la dirección de correo electrónico del usuario.")
+     *     ),
+     * @OA\Parameter(
+     *         description="Contraseña del usuario",
+     *         in="query",
+     *         name="password",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="string", value="t3st1ng", summary="Introduce la contraseña del usuario.")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Inicio de sesión exitoso."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     * ) 
+     */
     public function login(Request $request)
     {
         $prefix = __CLASS__ . '::' . __FUNCTION__ . ' -> ';

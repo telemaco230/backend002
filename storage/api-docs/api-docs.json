@@ -1,0 +1,66 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PRJ- eCommerce Documentation API",
+        "description": "Documentación de la API para PRJ- eCommerce.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Realiza el inicio de sesión del usuario",
+                "description": "Realiza el inicio de sesión del usuario.",
+                "operationId": "8dcb70df1020986038d098cc08d05dae",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Dirección de correo electrónico del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "Introduce la dirección de correo electrónico del usuario.",
+                                "value": "test@backend.com"
+                            }
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Contraseña del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "Introduce la contraseña del usuario.",
+                                "value": "t3st1ng"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Inicio de sesión exitoso."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "auth",
+            "description": "auth"
+        }
+    ]
+}
