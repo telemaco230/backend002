@@ -11,6 +11,8 @@ use Throwable;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
+use App\Traits\APIResponder;
+
 class AuthController extends Controller
 {
     public function register(Request $request)
@@ -31,7 +33,7 @@ class AuthController extends Controller
         {
             Log::error($prefix . " exception:\n" . $e->getMessage());
             Log::error($prefix . " stop");
-            return response()->json(['error' => 'Registration failed'], 500);
+            return $this->error('Registration failed', 500);
         }
         
 
@@ -46,10 +48,10 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             Log::error($prefix . " exception:\n" . $e->getMessage());
             Log::error($prefix . " stop");
-            return response()->json(['error' => 'Could not create token'], 500);
+            return $this->error('Could not create token', 500);
         }
 
-        return response()->json([
+        return $this->success('User registered successfully', [
             'token' => $token,
             'user' => $user,
         ], 201);
@@ -65,15 +67,16 @@ class AuthController extends Controller
 
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'Invalid credentials'], 401);
+                return $this->error('Invalid credentials', 401);
+                
             }
         } catch (JWTException $e) {
             Log::error($prefix . " exception:\n" . $e->getMessage());
             Log::error($prefix . " stop");
-            return response()->json(['error' => 'Could not create token'], 500);
+            return $this->error('Could not create token', 500);
         }
 
-        return response()->json([
+        return $this->success('User logged in successfully', [
             'token' => $token,
             'expires_in' => auth('api')->factory()->getTTL() * 60,
         ]);
@@ -88,10 +91,10 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             Log::error($prefix . " exception:\n" . $e->getMessage());
             Log::error($prefix . " stop");
-            return response()->json(['error' => 'Failed to logout, please try again'], 500);
+            return $this->error('Failed to logout, please try again', 500);
         }
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return $this->success('Successfully logged out');
     }
 
     public function getUser()
@@ -108,7 +111,7 @@ class AuthController extends Controller
         Log::debug($prefix . " stop");
             Log::error($prefix . " exception:\n" . $e->getMessage());
             Log::error($prefix . " stop");
-            return response()->json(['error' => 'Failed to fetch user profile'], 500);
+            return $this->error('Failed to fetch user profile', 500);
         }
     }
 
@@ -122,11 +125,11 @@ class AuthController extends Controller
             $user->update($request->only(['name', 'email']));
             Log::debug($prefix . " User updated succe");
             Log::debug($prefix . " stop");
-            return response()->json($user);
+            return $this->success('User updated successfully', $user->toArray());
         } catch (JWTException $e) {
             Log::error($prefix . " exception:\n" . $e->getMessage());
             Log::error($prefix . " stop");
-            return response()->json(['error' => 'Failed to update user'], 500);
+            return $this->error('Failed to update user', 500);
         }
     }
 }
