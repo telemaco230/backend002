@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Log;
+use Throwable;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
@@ -17,11 +18,22 @@ class AuthController extends Controller
         $prefix = __CLASS__ . '::' . __FUNCTION__ . ' -> ';
         Log::debug($prefix . " start");
         Log::debug($prefix . " request:\n" . json_encode($request->all(), JSON_PRETTY_PRINT));
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        try
+        {
+            Log::debug($prefix . " validating request");
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+            ]);            
+        }
+        catch(Throwable $e)
+        {
+            Log::error($prefix . " exception:\n" . $e->getMessage());
+            Log::error($prefix . " stop");
+            return response()->json(['error' => 'Registration failed'], 500);
+        }
+        
 
         $user = User::create([
             'name' => $request->name,
@@ -32,7 +44,7 @@ class AuthController extends Controller
         try {
             $token = JWTAuth::fromUser($user);
         } catch (JWTException $e) {
-            Log::error($prefix . " exception:\n" . $e->getMessage() . VarDumper::dumpAsString($request->all()));
+            Log::error($prefix . " exception:\n" . $e->getMessage());
             Log::error($prefix . " stop");
             return response()->json(['error' => 'Could not create token'], 500);
         }
@@ -112,7 +124,7 @@ class AuthController extends Controller
             Log::debug($prefix . " stop");
             return response()->json($user);
         } catch (JWTException $e) {
-            Log::error($prefix . " exception:\n" . $e->getMessage() . VarDumper::dumpAsString($request->all()));
+            Log::error($prefix . " exception:\n" . $e->getMessage());
             Log::error($prefix . " stop");
             return response()->json(['error' => 'Failed to update user'], 500);
         }
