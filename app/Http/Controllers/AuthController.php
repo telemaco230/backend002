@@ -51,6 +51,8 @@ class AuthController extends Controller
             return $this->error('Could not create token', 500);
         }
 
+        Log::debug($prefix . " User registered successfully");
+        Log::debug($prefix . " stop");
         return $this->success('User registered successfully', [
             'token' => $token,
             'user' => $user,
@@ -67,6 +69,8 @@ class AuthController extends Controller
 
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
+                Log::warning($prefix . " Invalid credentials");
+                Log::warning($prefix . " stop");
                 return $this->error('Invalid credentials', 401);
                 
             }
@@ -76,6 +80,8 @@ class AuthController extends Controller
             return $this->error('Could not create token', 500);
         }
 
+        Log::debug($prefix . " Successfully logged in");
+        Log::debug($prefix . " stop");
         return $this->success('User logged in successfully', [
             'token' => $token,
             'expires_in' => auth('api')->factory()->getTTL() * 60,
@@ -94,6 +100,8 @@ class AuthController extends Controller
             return $this->error('Failed to logout, please try again', 500);
         }
 
+        Log::debug($prefix . " Successfully logged out");
+        Log::debug($prefix . " stop");
         return $this->success('Successfully logged out');
     }
 
@@ -104,11 +112,14 @@ class AuthController extends Controller
         try {
             $user = Auth::user();
             if (!$user) {
+                Log::warning($prefix . " User not found");
+                Log::warning($prefix . " stop");
                 return response()->json(['error' => 'User not found'], 404);
             }
+                Log::debug($prefix . " User found");
+                Log::debug($prefix . " stop");
             return response()->json($user);
         } catch (JWTException $e) {
-        Log::debug($prefix . " stop");
             Log::error($prefix . " exception:\n" . $e->getMessage());
             Log::error($prefix . " stop");
             return $this->error('Failed to fetch user profile', 500);
