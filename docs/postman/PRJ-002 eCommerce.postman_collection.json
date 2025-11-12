@@ -43,6 +43,22 @@
 						},
 						{
 							"name": "login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// recuperar los datos de la respuesta\r",
+											"let responseData=pm.response.json();\r",
+											"// actualizar la variable de token BEARER\r",
+											"pm.collectionVariables.set(\"MAPS_BEARER_TOKEN\", responseData.data.token);"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -152,7 +168,7 @@
 									"formdata": []
 								},
 								"url": {
-									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/auth/user?name=Administrador&email=admin@backend.com",
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/auth/user?name=root&email=root@backend.com",
 									"host": [
 										"{{LOCAL_LARAVEL_SERVER}}"
 									],
@@ -164,11 +180,11 @@
 									"query": [
 										{
 											"key": "name",
-											"value": "Administrador"
+											"value": "root"
 										},
 										{
 											"key": "email",
-											"value": "admin@backend.com"
+											"value": "root@backend.com"
 										}
 									]
 								}
