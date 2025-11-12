@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "be020eb0-e9f0-4cc8-9bab-171264fdf5d9",
+		"name": "PRJ-002 eCommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5879019"
+	},
+	"item": [
+		{
+			"name": "local",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/auth/user",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "{{eCommerce_user}}",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{eCommerce_password}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/auth/login",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Usuario de pruebas",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "test@backend.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "t3st1ng",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "t3st1ng",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/auth/register",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/auth/user?name=Administrador&email=admin@backend.com",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"user"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Administrador"
+										},
+										{
+											"key": "email",
+											"value": "admin@backend.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/auth/logout",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "public",
+					"item": [
+						{
+							"name": "up",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/auth/user",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "LOCAL_LARAVEL_SERVER",
+			"value": ""
+		},
+		{
+			"key": "eCommerce_user",
+			"value": ""
+		},
+		{
+			"key": "eCommerce_password",
+			"value": ""
+		},
+		{
+			"key": "MAPS_BEARER_TOKEN",
+			"value": ""
+		}
+	]
+}
