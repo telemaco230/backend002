@@ -6,10 +6,105 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "AuthController",
+                    "api",
+                    "auth",
+                    "register"
+                ],
+                "summary": "Realiza el registro de un nuevo usuario",
+                "description": "Realiza el inicio de sesión del usuario.",
+                "operationId": "d764dd091cc4494ae0baf360b03319f3",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": false,
+                        "schema": {
+                            "type": "bearer"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nombre del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "Introduce el nombre del usuario.",
+                                "value": "Usuario de pruebas"
+                            }
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Dirección de correo electrónico del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "Introduce la dirección de correo electrónico del usuario.",
+                                "value": "test@backend.com"
+                            }
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Contraseña del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "Introduce la contraseña del usuario.",
+                                "value": "t3st1ng"
+                            }
+                        }
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "Confirmación de la contraseña del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "Introduce la verificación de la contraseña del usuario.",
+                                "value": "t3st1ng"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro de usuario correcto."
+                    },
+                    "default": {
+                        "description": "Error registrando usuario."
+                    }
+                }
+            }
+        },
         "/api/auth/login": {
             "post": {
                 "tags": [
-                    "auth"
+                    "AuthController",
+                    "api",
+                    "auth",
+                    "login"
                 ],
                 "summary": "Realiza el inicio de sesión del usuario",
                 "description": "Realiza el inicio de sesión del usuario.",
@@ -59,8 +154,24 @@
     },
     "tags": [
         {
+            "name": "AuthController",
+            "description": "AuthController"
+        },
+        {
+            "name": "api",
+            "description": "api"
+        },
+        {
             "name": "auth",
             "description": "auth"
+        },
+        {
+            "name": "register",
+            "description": "register"
+        },
+        {
+            "name": "login",
+            "description": "login"
         }
     ]
 }

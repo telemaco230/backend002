@@ -22,6 +22,64 @@ use App\Traits\APIResponder;
  */
 class AuthController extends Controller
 {
+
+    /**
+     * Realiza el inicio de sesión del usuario.
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     *
+     * @OA\Post(
+     *     path="/api/auth/register",
+     *     tags={"AuthController", "api", "auth", "register"},
+     *     summary="Realiza el registro de un nuevo usuario",
+     * @OA\Parameter(
+     *         description="Token JWT",
+     *         in="header",
+     *         name="Authorization",
+     *         required=false,
+     *         @OA\Schema(type="bearer"),
+     *     ),
+     * @OA\Parameter(
+     *         description="Nombre del usuario",
+     *         in="query",
+     *         name="name",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="string", value="Usuario de pruebas", summary="Introduce el nombre del usuario.")
+     *     ),
+     * @OA\Parameter(
+     *         description="Dirección de correo electrónico del usuario",
+     *         in="query",
+     *         name="email",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="string", value="test@backend.com", summary="Introduce la dirección de correo electrónico del usuario.")
+     *     ),
+     * @OA\Parameter(
+     *         description="Contraseña del usuario",
+     *         in="query",
+     *         name="password",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="string", value="t3st1ng", summary="Introduce la contraseña del usuario.")
+     *     ),
+     * @OA\Parameter(
+     *         description="Confirmación de la contraseña del usuario",
+     *         in="query",
+     *         name="password_confirmation",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="string", value="t3st1ng", summary="Introduce la verificación de la contraseña del usuario.")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Registro de usuario correcto."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Error registrando usuario."
+     *     )
+     * ) 
+     */
     public function register(Request $request)
     {
         $prefix = __CLASS__ . '::' . __FUNCTION__ . ' -> ';
@@ -72,7 +130,7 @@ class AuthController extends Controller
      *
      * @OA\Post(
      *     path="/api/auth/login",
-     *     tags={"auth"},
+     *     tags={"AuthController", "api", "auth", "login"},
      *     summary="Realiza el inicio de sesión del usuario",
      * @OA\Parameter(
      *         description="Dirección de correo electrónico del usuario",
