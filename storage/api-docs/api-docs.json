@@ -6,6 +6,310 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/articulos": {
+            "get": {
+                "tags": [
+                    "ArticuloController"
+                ],
+                "summary": "Listar todos los artículos",
+                "description": "Listar todos los artículos.",
+                "operationId": "021362b92b70d8c24f566bb0db7178d5",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de artículos."
+                    },
+                    "500": {
+                        "description": "Error interno del servidor."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ArticuloController"
+                ],
+                "summary": "Crear un nuevo artículo",
+                "description": "Crear un nuevo artículo con imágenes y documentos asociados.",
+                "operationId": "1576d3467aeea24559ab2a70e9a963d9",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "identificador_externo": {
+                                        "type": "string",
+                                        "example": "ART-001"
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Producto de ejemplo"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Descripción detallada"
+                                    },
+                                    "precio_base": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 100.5
+                                    },
+                                    "tipo_iva": {
+                                        "type": "string",
+                                        "example": "general"
+                                    },
+                                    "porcentaje_iva": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 21
+                                    },
+                                    "imagenes[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "documentos[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "proveedores[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "PROV-001",
+                                            "PROV-002",
+                                            "PROV-003"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Artículo creado exitosamente."
+                    },
+                    "400": {
+                        "description": "Error en la validación de datos."
+                    },
+                    "500": {
+                        "description": "Error interno del servidor."
+                    }
+                }
+            }
+        },
+        "/api/articulos/{id}": {
+            "get": {
+                "tags": [
+                    "ArticuloController"
+                ],
+                "summary": "Obtener un artículo específico",
+                "description": "Obtener un artículo específico con sus imágenes y documentos.",
+                "operationId": "53ebb83e59d006abd1bd488176d98899",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del artículo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Artículo encontrado."
+                    },
+                    "404": {
+                        "description": "Artículo no encontrado."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ArticuloController"
+                ],
+                "summary": "Actualizar un artículo existente",
+                "description": "Actualizar un artículo existente.",
+                "operationId": "03941216315b42f49feb506026f92e66",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del artículo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "_method": {
+                                        "type": "string",
+                                        "example": "PUT"
+                                    },
+                                    "identificador_externo": {
+                                        "type": "string",
+                                        "example": "ART-001"
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Producto actualizado"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Nueva descripción"
+                                    },
+                                    "precio_base": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 150.75
+                                    },
+                                    "tipo_iva": {
+                                        "type": "string",
+                                        "example": "reducido"
+                                    },
+                                    "porcentaje_iva": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10
+                                    },
+                                    "imagenes[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "documentos[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "proveedores[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "PROV-001",
+                                            "PROV-002"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Artículo actualizado exitosamente."
+                    },
+                    "404": {
+                        "description": "Artículo no encontrado."
+                    },
+                    "500": {
+                        "description": "Error interno del servidor."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ArticuloController"
+                ],
+                "summary": "Eliminar un artículo",
+                "description": "Eliminar un artículo y sus archivos asociados.",
+                "operationId": "de4809e8ad8eea751584f66ed2aab554",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del artículo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Artículo eliminado exitosamente."
+                    },
+                    "404": {
+                        "description": "Artículo no encontrado."
+                    },
+                    "500": {
+                        "description": "Error interno del servidor."
+                    }
+                }
+            }
+        },
         "/api/auth/register": {
             "post": {
                 "tags": [
@@ -150,9 +454,397 @@
                     }
                 }
             }
+        },
+        "/api/proveedores": {
+            "get": {
+                "tags": [
+                    "ProveedorController"
+                ],
+                "summary": "Listar todos los proveedores",
+                "description": "Listar todos los proveedores.",
+                "operationId": "5eb7d790ae5c32c59bd58744f5ed3da5",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de proveedores."
+                    },
+                    "500": {
+                        "description": "Error interno del servidor."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ProveedorController"
+                ],
+                "summary": "Crear un nuevo proveedor",
+                "description": "Crear un nuevo proveedor con artículos asociados.",
+                "operationId": "5c1bcfb0dbccf86c376dc7a47fdff311",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "identificador_externo": {
+                                        "type": "string",
+                                        "example": "PROV-001"
+                                    },
+                                    "nombre_comercial": {
+                                        "type": "string",
+                                        "example": "Distribuidora ABC"
+                                    },
+                                    "calendario_siempre_abierto": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "horario_lunes_inicio": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "09:00:00"
+                                    },
+                                    "horario_lunes_fin": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "18:00:00"
+                                    },
+                                    "horario_martes_inicio": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "09:00:00"
+                                    },
+                                    "horario_martes_fin": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "18:00:00"
+                                    },
+                                    "horario_miercoles_inicio": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "09:00:00"
+                                    },
+                                    "horario_miercoles_fin": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "18:00:00"
+                                    },
+                                    "horario_jueves_inicio": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "09:00:00"
+                                    },
+                                    "horario_jueves_fin": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "18:00:00"
+                                    },
+                                    "horario_viernes_inicio": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "09:00:00"
+                                    },
+                                    "horario_viernes_fin": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "18:00:00"
+                                    },
+                                    "horario_sabado_inicio": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "09:00:00"
+                                    },
+                                    "horario_sabado_fin": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "14:00:00"
+                                    },
+                                    "horario_domingo_inicio": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": null
+                                    },
+                                    "horario_domingo_fin": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": null
+                                    },
+                                    "articulos[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "ART-001",
+                                            "ART-002"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Proveedor creado exitosamente."
+                    },
+                    "400": {
+                        "description": "Error en la validación de datos."
+                    },
+                    "500": {
+                        "description": "Error interno del servidor."
+                    }
+                }
+            }
+        },
+        "/api/proveedores/{id}": {
+            "get": {
+                "tags": [
+                    "ProveedorController"
+                ],
+                "summary": "Obtener un proveedor específico",
+                "description": "Obtener un proveedor específico con sus artículos.",
+                "operationId": "1898d8b0458ba55e2c8240363838a2a6",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del proveedor",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Proveedor encontrado."
+                    },
+                    "404": {
+                        "description": "Proveedor no encontrado."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "ProveedorController"
+                ],
+                "summary": "Actualizar un proveedor existente",
+                "description": "Actualizar un proveedor existente.",
+                "operationId": "72364f0ee2e9c4041a2f38af705cea3b",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del proveedor",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "identificador_externo": {
+                                        "type": "string",
+                                        "example": "PROV-001"
+                                    },
+                                    "nombre_comercial": {
+                                        "type": "string",
+                                        "example": "Distribuidora ABC S.L."
+                                    },
+                                    "calendario_siempre_abierto": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "horario_lunes_inicio": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "08:00:00"
+                                    },
+                                    "horario_lunes_fin": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "20:00:00"
+                                    },
+                                    "articulos[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "ART-001",
+                                            "ART-003"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Proveedor actualizado exitosamente."
+                    },
+                    "404": {
+                        "description": "Proveedor no encontrado."
+                    },
+                    "500": {
+                        "description": "Error interno del servidor."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ProveedorController"
+                ],
+                "summary": "Eliminar un proveedor",
+                "description": "Eliminar un proveedor.",
+                "operationId": "8b7ae059b2d7afad943975d96233b0b7",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del proveedor",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Proveedor eliminado exitosamente."
+                    },
+                    "404": {
+                        "description": "Proveedor no encontrado."
+                    },
+                    "500": {
+                        "description": "Error interno del servidor."
+                    }
+                }
+            }
+        },
+        "/api/proveedores/{id}/disponibilidad": {
+            "get": {
+                "tags": [
+                    "ProveedorController"
+                ],
+                "summary": "Verificar disponibilidad de proveedor",
+                "description": "Verificar disponibilidad de un proveedor en un día y hora específicos.",
+                "operationId": "daddfd76aaf35084b19e40df94d2b444",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token JWT",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del proveedor",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "dia",
+                        "in": "query",
+                        "description": "Día de la semana (lunes, martes, miercoles, jueves, viernes, sabado, domingo)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hora",
+                        "in": "query",
+                        "description": "Hora a verificar en formato HH:MM:SS",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Disponibilidad verificada."
+                    },
+                    "404": {
+                        "description": "Proveedor no encontrado."
+                    }
+                }
+            }
         }
     },
     "tags": [
+        {
+            "name": "ArticuloController",
+            "description": "Operaciones sobre artículos"
+        },
+        {
+            "name": "ProveedorController",
+            "description": "Operaciones sobre proveedores"
+        },
         {
             "name": "AuthController",
             "description": "AuthController"

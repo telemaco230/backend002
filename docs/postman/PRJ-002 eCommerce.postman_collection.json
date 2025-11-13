@@ -227,6 +227,471 @@
 					]
 				},
 				{
+					"name": "articulos",
+					"item": [
+						{
+							"name": "Listar artículos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/articulos",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"articulos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear artículo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "identificador_externo",
+											"value": "ART-001",
+											"type": "text"
+										},
+										{
+											"key": "nombre",
+											"value": "Producto de ejemplo",
+											"type": "text"
+										},
+										{
+											"key": "descripcion",
+											"value": "Descripción detallada del producto",
+											"type": "text"
+										},
+										{
+											"key": "precio_base",
+											"value": "100.50",
+											"type": "text"
+										},
+										{
+											"key": "tipo_iva",
+											"value": "general",
+											"type": "text"
+										},
+										{
+											"key": "porcentaje_iva",
+											"value": "21.00",
+											"type": "text"
+										},
+										{
+											"key": "proveedores[]",
+											"value": "PROV-001",
+											"type": "text",
+											"description": "Identificador externo del proveedor 1"
+										},
+										{
+											"key": "proveedores[]",
+											"value": "PROV-002",
+											"type": "text",
+											"description": "Identificador externo del proveedor 2",
+											"disabled": true
+										},
+										{
+											"key": "imagenes[]",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "documentos[]",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/articulos",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"articulos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consultar artículo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/articulos/1",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"articulos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar artículo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "nombre",
+											"value": "Producto actualizado",
+											"type": "text"
+										},
+										{
+											"key": "descripcion",
+											"value": "Nueva descripción del producto",
+											"type": "text"
+										},
+										{
+											"key": "precio_base",
+											"value": "150.75",
+											"type": "text"
+										},
+										{
+											"key": "tipo_iva",
+											"value": "reducido",
+											"type": "text"
+										},
+										{
+											"key": "porcentaje_iva",
+											"value": "10.00",
+											"type": "text"
+										},
+										{
+											"key": "proveedores[]",
+											"value": "PROV-001",
+											"type": "text",
+											"description": "Identificador externo del proveedor - Reemplaza todos los anteriores"
+										},
+										{
+											"key": "imagenes[]",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "documentos[]",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/articulos/1",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"articulos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar artículo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/articulos/1",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"articulos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "proveedores",
+					"item": [
+						{
+							"name": "Listar proveedores",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/proveedores",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"proveedores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear proveedor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"identificador_externo\": \"PROV-001\",\n    \"nombre_comercial\": \"Distribuidora ABC\",\n    \"calendario_siempre_abierto\": false,\n    \"horario_lunes_inicio\": \"09:00:00\",\n    \"horario_lunes_fin\": \"18:00:00\",\n    \"horario_martes_inicio\": \"09:00:00\",\n    \"horario_martes_fin\": \"18:00:00\",\n    \"horario_miercoles_inicio\": \"09:00:00\",\n    \"horario_miercoles_fin\": \"18:00:00\",\n    \"horario_jueves_inicio\": \"09:00:00\",\n    \"horario_jueves_fin\": \"18:00:00\",\n    \"horario_viernes_inicio\": \"09:00:00\",\n    \"horario_viernes_fin\": \"18:00:00\",\n    \"horario_sabado_inicio\": \"09:00:00\",\n    \"horario_sabado_fin\": \"14:00:00\",\n    \"articulos\": [\"ART-001\"]\n}"
+								},
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/proveedores",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"proveedores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consultar proveedor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/proveedores/1",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"proveedores",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar proveedor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre_comercial\": \"Distribuidora ABC S.L.\",\n    \"horario_lunes_inicio\": \"08:00:00\",\n    \"horario_lunes_fin\": \"20:00:00\",\n    \"articulos\": [\"ART-001\", \"ART-002\"]\n}"
+								},
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/proveedores/1",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"proveedores",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar proveedor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/proveedores/1",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"proveedores",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verificar disponibilidad",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{MAPS_BEARER_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_LARAVEL_SERVER}}/api/proveedores/1/disponibilidad?dia=lunes&hora=10:30:00",
+									"host": [
+										"{{LOCAL_LARAVEL_SERVER}}"
+									],
+									"path": [
+										"api",
+										"proveedores",
+										"1",
+										"disponibilidad"
+									],
+									"query": [
+										{
+											"key": "dia",
+											"value": "lunes"
+										},
+										{
+											"key": "hora",
+											"value": "10:30:00"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "public",
 					"item": [
 						{

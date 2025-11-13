@@ -57,3 +57,45 @@ php artisan l5-swagger:generate
 ### JWT
 
 [Implement JWT Authentication in Laravel 12](https://medium.com/@aliboutaine/how-to-implement-jwt-authentication-in-laravel-12-1e2ae878d5dc)
+
+
+
+#
+
+## Flujos de trabajo de la plataforma
+
+### Venta a clientes anónimos
+
+Paso 1 [gesfun]: informa a backend
+  - Proveedores
+  - Articulos
+
+Paso 2 [cliente anónimo]:
+  - Selecciona del catálogo filtrado en el paso anterior los artículos, de todo lo que esté en catálogo, que le interese
+
+Paso 3 [backend]: 
+  - Tramitar el pedido:
+    - Confirmar el pedido
+    - Confirmar la compra con pasarela de pago
+    - Registrar las evidencias
+    - Comunicar con GESFUN para enviar todos los detalles del pedido
+
+### Venta a clientes de expediente_gesfun
+
+Paso 1 [gesfun]: informa a backend
+  - Proveedores
+  - Articulos
+
+Paso 2 [gesfun]: comunicar al backend las siguientes informaciones
+  - Cliente + Fallecido
+  - Lista de proveedores disponibles
+  - Artículos: datos + archivos
+
+Paso 3 [cliente]:
+  - Selecciona del catálogo filtrado en el paso anterior los artículos que le interese
+
+Paso 4 [backend]: 
+  - Tramitar el pedido
+
+### Portal de condolencias
+
